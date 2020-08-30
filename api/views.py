@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
-from .serialize import CreateUserSerializer
-from polls.models import User
+from .serialize import CreateUserSerializer,ImageSerializer
+from polls.models import User,Image
 
 
 import json
@@ -22,7 +22,8 @@ from decouple import config
 def HelloAPI(request):
     return Response("hello world!")
 
-
+# class =>
+# function =>
 @api_view(['POST'])
 def signUp(request):
     email = request.data.get('email')
@@ -38,9 +39,6 @@ def signUp(request):
             email=email, password=password_crypt2
         )
         result = CreateUserSerializer(data)
-        print(result.data, '12312312')
-        print('except')
-
     return JsonResponse({'success': True, 'id' : result.data['id']})
 
 
@@ -70,5 +68,19 @@ def UserInfo(request):
     return Response('확인')
 
 
+@api_view(['POST'])
+def saveImage(request):
+    image = request.data['file']
+    # image = request.data
+    data = Image.objects.create(
+        image=image
+    )
+    print(data)
+    result = ImageSerializer(data)
+    # print(result.data['image'])
+    fileName = result.data['image']
+    # print(fileName)
+    # return Response('sss')
+    return JsonResponse({'success': True, 'fileName': fileName})
 
 
