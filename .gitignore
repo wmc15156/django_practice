@@ -5,9 +5,8 @@ db.sqlite3
 *.pyc
 
 .env
-api/migrations
-polls/migrations
-home/migrations
+
+linkbyTag.pem
 
 # Created by https://www.toptal.com/developers/gitignore/api/django,python,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,python,pycharm
@@ -21,6 +20,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+./media
+./statics
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
